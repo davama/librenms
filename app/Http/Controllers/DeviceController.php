@@ -181,9 +181,15 @@ class DeviceController extends Controller
         ];
 
         // SSH
-        $ssh_url = Config::has('gateone.server')
-            ? Config::get('gateone.server') . '?ssh=ssh://' . (Config::get('gateone.use_librenms_user') ? Auth::user()->username . '@' : '') . $device['hostname'] . '&location=' . $device['hostname']
-            : 'ssh://' . $device->hostname;
+        if (isset(Config::has('gateone.server')) {
+            $ssh_url = Config::has('gateone.server')
+                ? Config::get('gateone.server') . '?ssh=ssh://' . (Config::get('gateone.use_librenms_user') ? Auth::user()->username . '@' : '') . $device['hostname'] . '&location=' . $device['hostname']
+                : 'ssh://' . $device->hostname;
+        } elseif (isset(Config::has('webssh2.server')) {
+       		$ssh_url = Config::has('webssh2.server')
+        	    ? Config::get('webssh2.server') . $device['hostname']
+        	    : 'ssh://' . $device->hostname;
+        }
         $device_links['ssh'] = [
             'icon' => 'fa-lock',
             'url' => $ssh_url,
