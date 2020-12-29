@@ -305,6 +305,8 @@ class DeviceController extends TableController
             } else {
                 $actions .= '<div class="col-xs-1"><a href="' . $server . '?ssh=ssh://' . $device->hostname . '&location=' . $device->hostname . '" target="_blank" rel="noopener"><i class="fa fa-lock fa-lg icon-theme" title="SSH to ' . $device->hostname . '"></i></a></div>';
             }
+        } elseif ($server = Config::get('webssh2.server')) {
+                $actions .= '<div class="col-xs-1"><a href="' . $server . $device->hostname . '" target="_blank" rel="noopener"><i class="fa fa-lock fa-lg icon-theme" title="SSH to ' . $device->hostname . '"></i></a></div>';
         } else {
             $actions .= '<div class="col-xs-1"><a href="ssh://' . $device->hostname . '"><i class="fa fa-lock fa-lg icon-theme" title="SSH to ' . $device->hostname . '"></i></a></div>';
         }
